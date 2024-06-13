@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 
@@ -18,6 +19,7 @@ import java.util.UUID;
 @Table(name = "events")
 @Getter
 @Setter
+@NoArgsConstructor
 public abstract class AbstractEvent implements Event {
 
     @Id
@@ -33,4 +35,10 @@ public abstract class AbstractEvent implements Event {
 
     @JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
     private Object payload;
+
+    public AbstractEvent(UUID aggregateId, EventType type, Object payload) {
+        this.aggregateId = aggregateId;
+        this.type = type;
+        this.payload = payload;
+    }
 }
