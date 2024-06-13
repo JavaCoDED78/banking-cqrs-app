@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS clients
 (
     id         VARCHAR(36) PRIMARY KEY,
     name       VARCHAR     NOT NULL,
+    password   VARCHAR     NOT NULL,
     account_id varchar(36) NOT NULL,
     CONSTRAINT clients_accounts FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE ON UPDATE NO ACTION
 );
@@ -30,7 +31,7 @@ CREATE TABLE IF NOT EXISTS client_cards
     card_id   VARCHAR(36) NOT NULL,
     CONSTRAINT client_cards_unique UNIQUE (client_id, card_id),
     CONSTRAINT client_cards_clients FOREIGN KEY (client_id) REFERENCES clients (id) ON DELETE CASCADE ON UPDATE NO ACTION,
-    CONSTRAINT client_cards_cards FOREIGN KEY (card_id) REFERENCES cards (id) ON DELETE CASCADE ON UPDATE NO ACTION
+    CONSTRAINT client_cards_cards FOREIGN KEY (card_id) REFERENCES cards (id)
 );
 
 CREATE TABLE IF NOT EXISTS transactions
@@ -38,6 +39,16 @@ CREATE TABLE IF NOT EXISTS transactions
     id      VARCHAR(36) PRIMARY KEY,
     from_id VARCHAR(36) NOT NULL,
     to_id   VARCHAR(36) NOT NULL,
+    amount  NUMERIC     NOT NULL,
     CONSTRAINT transactions_cards_from FOREIGN KEY (from_id) REFERENCES cards (id) ON DELETE CASCADE ON UPDATE NO ACTION,
     CONSTRAINT transactions_cards_to FOREIGN KEY (to_id) REFERENCES cards (id) ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS cards_transactions
+(
+    card_id        varchar(36) not null,
+    transaction_id varchar(36) not null,
+    CONSTRAINT cards_transactions_unique UNIQUE (card_id, transaction_id),
+    CONSTRAINT cards_transactions_cards FOREIGN KEY (card_id) REFERENCES cards (id) ON DELETE CASCADE ON UPDATE NO ACTION,
+    CONSTRAINT cards_transactions_transactions FOREIGN KEY (transaction_id) REFERENCES transactions (id)
 );
