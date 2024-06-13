@@ -3,8 +3,8 @@ WORKDIR /app
 COPY pom.xml ./
 RUN mvn dependency:go-offline
 COPY src ./src
-#COPY checkstyle-config.xml ./
-#COPY checkstyle-suppressions.xml ./
+COPY checkstyle-config.xml ./
+COPY checkstyle-suppressions.xml ./
 RUN mvn clean package -DskipTests
 
 FROM openjdk:21-jdk-slim
