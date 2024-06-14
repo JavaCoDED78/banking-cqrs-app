@@ -1,8 +1,8 @@
 package com.javaded.web.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Positive;
 import lombok.Builder;
 
 import java.math.BigDecimal;
@@ -15,12 +15,16 @@ public record TransactionDto(
         @Null(message = "Id must be null.", groups = OnCreate.class)
         UUID id,
 
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+        @NotBlank(message = "Sender card must not be blank.", groups = OnCreate.class)
+        @Null(message = "Sender card must be null.")
         CardDto from,
 
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+        @NotBlank(message = "Receiver card must not be blank.", groups = OnCreate.class)
+        @Null(message = "Receiver card must be null.")
         CardDto to,
 
+        @NotBlank(message = "Amount must not be blank.")
+        @Positive(message = "Amount must be positive.")
         BigDecimal amount
 ) {
 }

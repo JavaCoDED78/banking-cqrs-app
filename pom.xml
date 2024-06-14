@@ -92,7 +92,7 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${checkstyle.version}</version>
                 <configuration>
-                    <configLocation>sun_checks.xml</configLocation>
+                    <configLocation>checkstyle-config.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
@@ -105,9 +105,8 @@
                             <goal>check</goal>
                         </goals>
                         <configuration>
-                            <configLocation>checkstyle-config.xml</configLocation>
-                            <suppressionsFileExpression>checkstyle-suppressions.xml</suppressionsFileExpression>
                             <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+                            <suppressionsFileExpression>checkstyle-suppressions.xml</suppressionsFileExpression>
                         </configuration>
                     </execution>
                 </executions>

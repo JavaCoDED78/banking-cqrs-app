@@ -36,7 +36,7 @@ public abstract class AbstractEvent implements Event {
     @JdbcTypeCode(org.hibernate.type.SqlTypes.JSON)
     private Object payload;
 
-    public AbstractEvent(UUID aggregateId, EventType type, Object payload) {
+    public AbstractEvent(final UUID aggregateId, final EventType type, final Object payload) {
         this.aggregateId = aggregateId;
         this.type = type;
         this.payload = payload;

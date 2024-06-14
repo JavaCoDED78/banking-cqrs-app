@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS clients
 (
     id         VARCHAR(36) PRIMARY KEY,
     name       VARCHAR     NOT NULL,
+    username   VARCHAR     NOT NULL UNIQUE,
     password   VARCHAR     NOT NULL,
     account_id varchar(36) NOT NULL,
     CONSTRAINT clients_accounts FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE ON UPDATE NO ACTION

@@ -15,7 +15,7 @@ public class TransactionCommandServiceImpl implements TransactionCommandService 
     private final EventService eventService;
 
     @Override
-    public void create(Transaction obj) {
+    public void create(final Transaction obj) {
         TransactionCreateEvent event = new TransactionCreateEvent(obj);
         eventService.publish(event);
     }

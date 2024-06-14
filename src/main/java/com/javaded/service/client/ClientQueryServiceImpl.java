@@ -15,7 +15,7 @@ public class ClientQueryServiceImpl implements ClientQueryService {
     private final ClientRepository clientRepository;
 
     @Override
-    public Client getById(UUID id) {
+    public Client getById(final UUID id) {
         return clientRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new);
     }

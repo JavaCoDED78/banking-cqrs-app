@@ -1,6 +1,7 @@
 package com.javaded.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
@@ -17,8 +18,12 @@ public record ClientDto(
         UUID id,
 
         @NotBlank(message = "Name must not be blank.")
-                @Size(min = 1, max = 255, message = "Name must be between {min} and {max} characters in length.")
+        @Size(min = 1, max = 255, message = "Name must be between {min} and {max} characters in length.")
         String name,
+
+        @NotBlank(message = "Username must not be blank.")
+        @Email(message = "Username must be between {min} and {max} characters in length.")
+        String username,
 
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         String password,

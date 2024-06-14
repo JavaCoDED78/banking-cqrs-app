@@ -14,12 +14,12 @@ public class ClientServiceImpl implements ClientService {
     private final ClientQueryService clientQueryService;
 
     @Override
-    public void create(Client obj) {
+    public void create(final Client obj) {
         clientCommandService.create(obj);
     }
 
     @Override
-    public Client getById(UUID id) {
+    public Client getById(final UUID id) {
         return clientQueryService.getById(id);
     }
 }

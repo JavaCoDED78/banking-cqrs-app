@@ -8,12 +8,12 @@ import lombok.Setter;
 @Setter
 public class ClientCreateEvent extends AbstractEvent {
 
-    public ClientCreateEvent(Object payload) {
+    public ClientCreateEvent(final Object payload) {
         super(null, EventType.CLIENT_CREATE, payload);
     }
 
     @Override
-    public void apply(Aggregate aggregate) {
+    public void apply(final Aggregate aggregate) {
 
     }
 }
