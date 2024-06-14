@@ -1,0 +1,30 @@
+package com.javaded.web.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Positive;
+import lombok.Builder;
+
+import java.math.BigDecimal;
+import java.util.UUID;
+
+@Builder
+public record TransactionDto(
+
+        @NotBlank(message = "Id must not be blank.", groups = OnUpdate.class)
+        @Null(message = "Id must be null.", groups = OnCreate.class)
+        UUID id,
+
+        @NotBlank(message = "Sender card must not be blank.", groups = OnCreate.class)
+        @Null(message = "Sender card must be null.")
+        CardDto from,
+
+        @NotBlank(message = "Receiver card must not be blank.", groups = OnCreate.class)
+        @Null(message = "Receiver card must be null.")
+        CardDto to,
+
+        @NotBlank(message = "Amount must not be blank.")
+        @Positive(message = "Amount must be positive.")
+        BigDecimal amount
+) {
+}

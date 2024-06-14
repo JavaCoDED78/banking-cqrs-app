@@ -8,12 +8,12 @@ import lombok.Setter;
 @Setter
 public class TransactionCreateEvent extends AbstractEvent {
 
-    public TransactionCreateEvent(Object payload) {
+    public TransactionCreateEvent(final Object payload) {
         super(null, EventType.TRANSACTION_CREATE, payload);
     }
 
     @Override
-    public void apply(Aggregate aggregate) {
+    public void apply(final Aggregate aggregate) {
 
     }
 }

@@ -12,7 +12,7 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
 
     @Override
-    public void publish(AbstractEvent event) {
+    public void publish(final AbstractEvent event) {
         eventRepository.save(event);
     }
 }
