@@ -1,4 +1,14 @@
 package com.javaded.web.dto;
 
-public record LoginResponseDto() {
+import lombok.Builder;
+
+import java.util.UUID;
+
+@Builder
+public record LoginResponseDto(
+
+        UUID id,
+        String accessToken,
+        String refreshToken
+) {
 }

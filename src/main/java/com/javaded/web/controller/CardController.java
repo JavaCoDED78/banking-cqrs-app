@@ -33,13 +33,13 @@ public class CardController {
     }
 
     @GetMapping("{/id}")
-    public CardDto getById(@PathVariable UUID id) {
+    public CardDto getById(@PathVariable final UUID id) {
         Card card = cardService.getById(id);
         return cardMapper.toDto(card);
     }
 
     @GetMapping("{id}/transactions")
-    public List<TransactionDto> getTransactionsById(@PathVariable UUID id) {
+    public List<TransactionDto> getTransactionsById(@PathVariable final UUID id) {
         Card card = cardService.getById(id);
         return transactionMapper.toDto(card.getTransactions());
     }

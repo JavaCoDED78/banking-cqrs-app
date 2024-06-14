@@ -23,7 +23,7 @@ public class TransactionController {
 
     private final TransactionService transactionService;
     private final TransactionMapper transactionMapper;
-    
+
     @PostMapping
     public void create(@RequestBody @Validated(OnCreate.class) final TransactionDto transactionDto) {
         Transaction transaction = transactionMapper.fromDto(transactionDto);
@@ -35,4 +35,5 @@ public class TransactionController {
         Transaction transaction = transactionService.getById(id);
         return transactionMapper.toDto(transaction);
     }
+
 }

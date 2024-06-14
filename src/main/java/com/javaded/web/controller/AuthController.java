@@ -23,12 +23,12 @@ public class AuthController {
     private final ClientMapper clientMapper;
 
     @PostMapping("/login")
-    public LoginResponseDto login(@RequestBody @Validated(OnCreate.class) LoginRequestDto loginRequestDto) {
+    public LoginResponseDto login(@RequestBody @Validated(OnCreate.class) final LoginRequestDto loginRequestDto) {
         return authService.login(loginRequestDto);
     }
 
     @PostMapping("/register")
-    public void register(@RequestBody @Validated ClientDto clientDto) {
+    public void register(@RequestBody @Validated(OnCreate.class) final ClientDto clientDto) {
         Client client = clientMapper.fromDto(clientDto);
         authService.register(client);
     }

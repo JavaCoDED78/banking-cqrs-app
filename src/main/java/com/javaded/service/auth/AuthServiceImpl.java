@@ -14,12 +14,12 @@ public class AuthServiceImpl implements AuthService {
     private final ClientService clientService;
 
     @Override
-    public LoginResponseDto login(LoginRequestDto request) {
+    public LoginResponseDto login(final LoginRequestDto request) {
         return null;
     }
 
     @Override
-    public void register(Client client) {
+    public void register(final Client client) {
         clientService.create(client);
     }
 }

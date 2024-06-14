@@ -27,7 +27,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public void createByClientId(UUID clientId) {
+    public void createByClientId(final UUID clientId) {
         Client client = clientService.getById(clientId);
         Card card = new Card(client.getAccount());
         cardCommandService.create(card);
