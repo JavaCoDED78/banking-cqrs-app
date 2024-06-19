@@ -15,7 +15,6 @@ import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -26,7 +25,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Card implements Serializable {
+public class Card {
 
     @Id
     @GeneratedValue

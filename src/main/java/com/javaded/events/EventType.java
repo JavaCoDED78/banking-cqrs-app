@@ -2,6 +2,9 @@ package com.javaded.events;
 
 public enum EventType {
 
+    ACCOUNT_CREATE,
+    ACCOUNT_UPDATE,
+    ACCOUNT_DELETE,
     CLIENT_CREATE,
     CLIENT_UPDATE,
     CLIENT_DELETE,

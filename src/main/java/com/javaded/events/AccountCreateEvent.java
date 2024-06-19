@@ -1,7 +1,7 @@
 package com.javaded.events;
 
 import com.javaded.domain.aggregate.Aggregate;
-import com.javaded.domain.model.Client;
+import com.javaded.domain.model.Account;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,14 +11,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ClientCreateEvent extends AbstractEvent {
+public class AccountCreateEvent extends AbstractEvent {
 
-    public ClientCreateEvent(final Client payload) {
-        super(null, EventType.CLIENT_CREATE, payload);
+    public AccountCreateEvent(final Account payload) {
+        super(null, EventType.ACCOUNT_CREATE, payload);
     }
 
     @Override
     public void apply(final Aggregate aggregate) {
-//        TODO implement
+        // TODO implement
     }
 }
