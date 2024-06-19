@@ -21,7 +21,7 @@
         <liquibase.version>4.28.0</liquibase.version>
         <postgresql.version>42.7.3</postgresql.version>
         <lombok.version>1.18.32</lombok.version>
-        <checkstyle.version>3.2.2</checkstyle.version>
+        <checkstyle.version>3.4.0</checkstyle.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <jwt.version>0.3.1</jwt.version>
     </properties>
