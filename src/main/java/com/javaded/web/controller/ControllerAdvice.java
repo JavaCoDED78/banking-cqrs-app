@@ -50,9 +50,9 @@ public class ControllerAdvice {
         return new MessageDto("Access denied.");
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public MessageDto validationException(final MethodArgumentNotValidException e) {
+    public MessageDto validation(final MethodArgumentNotValidException e) {
         Map<String, String> errors = e.getBindingResult()
                 .getFieldErrors().stream()
                 .collect(Collectors.toMap(

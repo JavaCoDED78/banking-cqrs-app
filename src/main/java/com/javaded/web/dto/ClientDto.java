@@ -20,11 +20,12 @@ public record ClientDto(
         @Size(min = 1, max = 255, message = "Name must be between {min} and {max} characters in length.")
         String name,
 
+        @Email(message = "Email must be a valid email address.")
         @NotBlank(message = "Username must not be blank.")
-        @Email(message = "Username must be between {min} and {max} characters in length.")
+        @Size(min = 1, max = 255, message = "Username must be between {min} and {max} characters in length.")
         String username,
 
-        @NotBlank(message = "Password must not be blank.", groups = OnCreate.class)
+        @NotBlank(message = "Password must not be blank.")
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         String password
 
