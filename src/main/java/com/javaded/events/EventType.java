@@ -1,0 +1,17 @@
+package com.javaded.events;
+
+public enum EventType {
+
+    ACCOUNT_CREATE,
+    ACCOUNT_UPDATE,
+    ACCOUNT_DELETE,
+    CLIENT_CREATE,
+    CLIENT_UPDATE,
+    CLIENT_DELETE,
+    CARD_CREATE,
+    CARD_UPDATE,
+    CARD_DELETE,
+    TRANSACTION_CREATE,
+    TRANSACTION_UPDATE,
+    TRANSACTION_DELETE
+}
