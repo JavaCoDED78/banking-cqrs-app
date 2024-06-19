@@ -1,11 +1,9 @@
 package com.javaded.web.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
 import lombok.Builder;
 
-import java.util.List;
 import java.util.UUID;
 
 @Builder
@@ -15,19 +13,17 @@ public record CardDto(
         @Null(message = "Id must be null.", groups = OnCreate.class)
         UUID id,
 
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+        @NotBlank(message = "Number must not be blank.", groups = OnCreate.class)
+        @Null(message = "Number must be null.")
         String number,
 
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+        @NotBlank(message = "Cvv must not be blank.", groups = OnCreate.class)
+        @Null(message = "Cvv must be null.")
         String cvv,
 
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-        String date,
+        @NotBlank(message = "Date must not be blank.", groups = OnCreate.class)
+        @Null(message = "Date must be null.")
+        String date
 
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-        List<TransactionDto> transactions,
-
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-        AccountDto account
 ) {
 }

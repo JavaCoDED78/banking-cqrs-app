@@ -26,13 +26,13 @@ CREATE TABLE IF NOT EXISTS cards
     CONSTRAINT cards_accounts FOREIGN KEY (account_id) REFERENCES accounts (id) ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
-CREATE TABLE IF NOT EXISTS client_cards
+CREATE TABLE IF NOT EXISTS clients_cards
 (
     client_id VARCHAR(36) NOT NULL,
     card_id   VARCHAR(36) NOT NULL,
-    CONSTRAINT client_cards_unique UNIQUE (client_id, card_id),
-    CONSTRAINT client_cards_clients FOREIGN KEY (client_id) REFERENCES clients (id) ON DELETE CASCADE ON UPDATE NO ACTION,
-    CONSTRAINT client_cards_cards FOREIGN KEY (card_id) REFERENCES cards (id)
+    CONSTRAINT clients_cards_unique UNIQUE (client_id, card_id),
+    CONSTRAINT clients_cards_clients FOREIGN KEY (client_id) REFERENCES clients (id) ON DELETE CASCADE ON UPDATE NO ACTION,
+    CONSTRAINT clients_cards_cards FOREIGN KEY (card_id) REFERENCES cards (id)
 );
 
 CREATE TABLE IF NOT EXISTS transactions

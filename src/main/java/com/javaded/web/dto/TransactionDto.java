@@ -1,5 +1,6 @@
 package com.javaded.web.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Positive;
@@ -17,10 +18,12 @@ public record TransactionDto(
 
         @NotBlank(message = "Sender card must not be blank.", groups = OnCreate.class)
         @Null(message = "Sender card must be null.")
+        @Valid
         CardDto from,
 
         @NotBlank(message = "Receiver card must not be blank.", groups = OnCreate.class)
         @Null(message = "Receiver card must be null.")
+        @Valid
         CardDto to,
 
         @NotBlank(message = "Amount must not be blank.")

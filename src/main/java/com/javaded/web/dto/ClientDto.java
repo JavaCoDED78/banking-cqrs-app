@@ -7,7 +7,6 @@ import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
-import java.util.List;
 import java.util.UUID;
 
 @Builder
@@ -25,10 +24,9 @@ public record ClientDto(
         @Email(message = "Username must be between {min} and {max} characters in length.")
         String username,
 
+        @NotBlank(message = "Password must not be blank.", groups = OnCreate.class)
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-        String password,
+        String password
 
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-        List<CardDto> cards
 ) {
 }

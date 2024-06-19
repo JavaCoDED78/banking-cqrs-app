@@ -5,4 +5,9 @@ import com.javaded.service.CommandService;
 import com.javaded.service.QueryService;
 
 public interface ClientService extends CommandService<Client>, QueryService<Client> {
+
+    Client getByUsername(String username);
+
+    boolean existsByUsername(String username);
+
 }
