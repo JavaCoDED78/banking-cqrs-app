@@ -19,4 +19,19 @@ public class CardQueryServiceImpl implements CardQueryService {
         return cardRepository.findById(id)
                 .orElseThrow(ResourceNotFoundException::new);
     }
+
+
+    @Override
+    public boolean existsByNumberAndDate(final String number,
+                                         final String date) {
+        return cardRepository.existsByNumberAndDate(number, date);
+    }
+
+    @Override
+    public Card getByNumberAndDateAndCvv(final String number,
+                                          final String date,
+                                          final String cvv) {
+        return cardRepository.findByNumberAndDateAndCvv(number, date, cvv)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
 }
