@@ -6,6 +6,7 @@ import com.javaded.service.transaction.TransactionService;
 import com.javaded.web.dto.OnCreate;
 import com.javaded.web.dto.TransactionDto;
 import com.javaded.web.mapper.TransactionMapper;
+import jakarta.validation.groups.Default;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
@@ -29,7 +30,7 @@ public class TransactionController {
 
     @PostMapping
     @PreAuthorize("@ssi.canAccessCard(#transactionDto.from())")
-    public void create(@RequestBody @Validated(OnCreate.class) final TransactionDto transactionDto) {
+    public void create(@RequestBody @Validated({Default.class, OnCreate.class}) final TransactionDto transactionDto) {
         if (!cardService.existsByNumberAndDate(transactionDto.from().number(), transactionDto.to().date())) {
             throw new IllegalArgumentException("Card does not exist");
         }
