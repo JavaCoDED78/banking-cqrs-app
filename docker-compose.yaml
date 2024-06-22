@@ -16,7 +16,7 @@ volumes:
 
 services:
   backend:
-    image: androsor/banking-cqrs-app:latest
+    image: ./core-service
     ports:
       - "8080:8080"
     env_file:
