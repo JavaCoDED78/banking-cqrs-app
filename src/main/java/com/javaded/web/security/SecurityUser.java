@@ -20,12 +20,12 @@ public class SecurityUser implements UserDetails {
     public SecurityUser(final Client user) {
         this(user.getId(), user.getUsername(), user.getPassword());
         this.authorities.add(
-                mapToGrantedAuthorities("ROLE_USER")
+                mapToGrantedAuthorities()
         );
     }
 
-    private static SimpleGrantedAuthority mapToGrantedAuthorities(final String roleUser) {
-        return new SimpleGrantedAuthority(roleUser);
+    private static SimpleGrantedAuthority mapToGrantedAuthorities() {
+        return new SimpleGrantedAuthority("ROLE_USER");
     }
 
     private SecurityUser(final UUID id,

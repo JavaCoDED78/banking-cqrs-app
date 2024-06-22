@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Builder
-public record MessageDto(
+public record MessageErrorDto(
 
         String message,
         Map<String, String> errors
 ) {
 
-    public MessageDto(final String message) {
+    public MessageErrorDto(final String message) {
         this(message, new HashMap<>());
     }
 

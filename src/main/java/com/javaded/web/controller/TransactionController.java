@@ -28,20 +28,17 @@ public class TransactionController {
     private final TransactionMapper transactionMapper;
 
     @PostMapping
-    @PreAuthorize("@securityServiceImpl.canAccessCard(#transactionDto.from())")
+    @PreAuthorize("@ssi.canAccessCard(#transactionDto.from())")
     public void create(@RequestBody @Validated(OnCreate.class) final TransactionDto transactionDto) {
-        if (!cardService.existsByNumberAndDate(
-                transactionDto.from().number(),
-                transactionDto.to().date())
-        ) {
+        if (!cardService.existsByNumberAndDate(transactionDto.from().number(), transactionDto.to().date())) {
             throw new IllegalArgumentException("Card does not exist");
         }
         Transaction transaction = transactionMapper.fromDto(transactionDto);
         transactionService.create(transaction);
     }
 
-    @GetMapping("{id}")
-    @PreAuthorize("@securityServiceImpl.canAccessTransaction(#id)")
+    @GetMapping("/{id}")
+    @PreAuthorize("@ssi.canAccessTransaction(#id)")
     public TransactionDto getById(@PathVariable final UUID id) {
         Transaction transaction = transactionService.getById(id);
         return transactionMapper.toDto(transaction);

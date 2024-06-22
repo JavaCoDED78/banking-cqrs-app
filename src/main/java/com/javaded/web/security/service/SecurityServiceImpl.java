@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-@Service("securityServiceImpl")
+@Service("ssi")
 @RequiredArgsConstructor
 public class SecurityServiceImpl implements SecurityService {
 
@@ -46,6 +46,7 @@ public class SecurityServiceImpl implements SecurityService {
         SecurityUser user = getUserFromRequest();
         Client client = clientService.getById(user.getId());
         return client.getCards().stream().anyMatch(card -> card.getId().equals(cardId));
+        // TODO implement from check in db
     }
 
     @Override
@@ -69,6 +70,7 @@ public class SecurityServiceImpl implements SecurityService {
         Transaction transaction = transactionService.getById(transactionId);
         return client.getCards().contains(transaction.getFrom())
                || client.getCards().contains(transaction.getTo());
+        // TODO optimise code
     }
 
 }

@@ -68,7 +68,7 @@ public class SecurityConfig {
                             response.getWriter().write("Forbidden.");
                         }))
                 .authorizeHttpRequests(configurer -> configurer
-                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v*/auth/**").permitAll()
                         .anyRequest().authenticated())
                 .anonymous(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new JwtTokenFilter(userDetailsService, tokenService()),

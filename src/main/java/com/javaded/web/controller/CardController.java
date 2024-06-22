@@ -35,15 +35,15 @@ public class CardController {
         cardService.createByClientId(user.getId());
     }
 
-    @GetMapping("{id}")
-    @PreAuthorize("@securityServiceImpl.canAccessCard(#id)")
+    @GetMapping("/{id}")
+    @PreAuthorize("@ssi.canAccessCard(#id)")
     public CardDto getById(@PathVariable final UUID id) {
         Card card = cardService.getById(id);
         return cardMapper.toDto(card);
     }
 
-    @GetMapping("{id}/transactions")
-    @PreAuthorize("@securityServiceImpl.canAccessCard(#id)")
+    @GetMapping("/{id}/transactions")
+    @PreAuthorize("@ssi.canAccessCard(#id)")
     public List<TransactionDto> getTransactionsById(@PathVariable final UUID id) {
         Card card = cardService.getById(id);
         return transactionMapper.toDto(card.getTransactions());
