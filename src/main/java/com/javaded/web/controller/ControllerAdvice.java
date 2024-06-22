@@ -2,8 +2,7 @@ package com.javaded.web.controller;
 
 import com.javaded.domain.exception.ResourceAlreadyExistsException;
 import com.javaded.domain.exception.ResourceNotFoundException;
-import com.javaded.web.dto.MessageDto;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
+import com.javaded.web.dto.MessageErrorDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,15 +14,16 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toMap;
 
 @RestControllerAdvice
 public class ControllerAdvice {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public MessageDto resourceNotFound(final ResourceNotFoundException e) {
-        return new MessageDto(e.getMessage() != null
+    public MessageErrorDto resourceNotFound(final ResourceNotFoundException e) {
+        return new MessageErrorDto(e.getMessage() != null
                 ? e.getMessage()
                 : "Not found."
         );
@@ -31,8 +31,8 @@ public class ControllerAdvice {
 
     @ExceptionHandler(ResourceAlreadyExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public MessageDto resourceAlreadyExists(final ResourceAlreadyExistsException e) {
-        return new MessageDto(e.getMessage() != null
+    public MessageErrorDto resourceAlreadyExists(final ResourceAlreadyExistsException e) {
+        return new MessageErrorDto(e.getMessage() != null
                 ? e.getMessage()
                 : "Already exists."
         );
@@ -40,40 +40,43 @@ public class ControllerAdvice {
 
     @ExceptionHandler({BadCredentialsException.class, InternalAuthenticationServiceException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public MessageDto badCredentials(final RuntimeException e) {
-        return new MessageDto("Authentication failed.");
+    public MessageErrorDto badCredentials(final RuntimeException e) {
+        return new MessageErrorDto("Authentication failed.");
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public MessageDto accessDenied(final AccessDeniedException e) {
-        return new MessageDto("Access denied.");
+    public MessageErrorDto accessDenied(final AccessDeniedException e) {
+        return new MessageErrorDto("Access denied.");
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public MessageDto validation(final MethodArgumentNotValidException e) {
+    public MessageErrorDto validation(final MethodArgumentNotValidException e) {
         Map<String, String> errors = e.getBindingResult()
                 .getFieldErrors().stream()
-                .collect(Collectors.toMap(
+                .collect(toMap(
                         FieldError::getField,
-                        DefaultMessageSourceResolvable::getDefaultMessage,
+                        error -> {
+                            String defaultMessage = error.getDefaultMessage();
+                            return defaultMessage != null ? defaultMessage : "";
+                        },
                         (existingMessage, newMessage) -> existingMessage + " " + newMessage
                 ));
-        return new MessageDto("Validation failed.", errors);
+        return new MessageErrorDto("Validation failed.", errors);
     }
 
     @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public MessageDto illegalState(final IllegalStateException e) {
-        return new MessageDto(e.getMessage());
+    public MessageErrorDto illegalState(final IllegalStateException e) {
+        return new MessageErrorDto(e.getMessage());
     }
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public MessageDto exception(final Exception e) {
+    public MessageErrorDto exception(final Exception e) {
         e.printStackTrace();
-        return new MessageDto("Server error.");
+        return new MessageErrorDto("Server error.");
     }
 
 }

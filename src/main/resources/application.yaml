@@ -10,8 +10,10 @@ spring:
     change-log: classpath:liquibase/db.changelog.yaml
     enabled: true
   jpa:
-    hibernate:
+    properties.hibernate:
       ddl-auto: none
+      show-sql: true
+      format_sql: true
 
 security:
   jwt:
