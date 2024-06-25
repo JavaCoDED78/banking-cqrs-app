@@ -16,16 +16,22 @@ public record ClientDto(
         @Null(message = "Id must be null.", groups = OnCreate.class)
         UUID id,
 
-        @NotBlank(message = "Name must not be blank.")
-        @Size(min = 1, max = 255, message = "Name must be between {min} and {max} characters in length.")
+        @NotBlank(message = "Name must not be blank.", groups = {OnCreate.class, OnUpdate.class})
+        @Size(min = 1,
+                max = 255,
+                message = "Name must be between {min} and {max} characters in length.",
+                groups = {OnCreate.class, OnUpdate.class})
         String name,
 
         @Email(message = "Email must be a valid email address.")
-        @NotBlank(message = "Username must not be blank.")
-        @Size(min = 1, max = 255, message = "Username must be between {min} and {max} characters in length.")
+        @NotBlank(message = "Username must not be blank.", groups = {OnCreate.class, OnUpdate.class})
+        @Size(min = 1,
+                max = 255,
+                message = "Username must be between {min} and {max} characters in length.",
+                groups = {OnCreate.class, OnUpdate.class})
         String username,
 
-        @NotBlank(message = "Password must not be blank.")
+        @NotBlank(message = "Password must not be blank.", groups = {OnCreate.class, OnUpdate.class})
         @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
         String password
 

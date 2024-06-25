@@ -14,15 +14,12 @@ public record CardDto(
         UUID id,
 
         @NotBlank(message = "Number must not be blank.", groups = OnCreate.class)
-        @Null(message = "Number must be null.")
         String number,
 
         @NotBlank(message = "Cvv must not be blank.", groups = OnCreate.class)
-        @Null(message = "Cvv must be null.")
         String cvv,
 
         @NotBlank(message = "Date must not be blank.", groups = OnCreate.class)
-        @Null(message = "Date must be null.")
         String date
 
 ) {
