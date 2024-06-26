@@ -17,17 +17,15 @@ public record TransactionDto(
         UUID id,
 
         @NotBlank(message = "Sender card must not be blank.", groups = OnCreate.class)
-        @Null(message = "Sender card must be null.")
         @Valid
         CardDto from,
 
         @NotBlank(message = "Receiver card must not be blank.", groups = OnCreate.class)
-        @Null(message = "Receiver card must be null.")
         @Valid
         CardDto to,
 
-        @NotBlank(message = "Amount must not be blank.")
-        @Positive(message = "Amount must be positive.")
+        @NotBlank(message = "Amount must not be blank.", groups = OnCreate.class)
+        @Positive(message = "Amount must be positive.", groups = OnCreate.class)
         BigDecimal amount
 ) {
 }
