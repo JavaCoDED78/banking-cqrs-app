@@ -34,4 +34,11 @@ public class CardQueryServiceImpl implements CardQueryService {
         return cardRepository.findByNumberAndDateAndCvv(number, date, cvv)
                 .orElseThrow(ResourceNotFoundException::new);
     }
+
+    @Override
+    public Card getByNumberAndDate(final String number,
+                                   final String date) {
+        return cardRepository.findByNumberAndDate(number, date)
+                .orElseThrow(ResourceNotFoundException::new);
+    }
 }

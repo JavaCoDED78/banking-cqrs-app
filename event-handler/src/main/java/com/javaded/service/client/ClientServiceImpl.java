@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
@@ -23,4 +25,15 @@ public class ClientServiceImpl implements ClientService {
         client.setAccount(account);
         return clientRepository.save(client);
     }
+
+    @Override
+    @jakarta.transaction.Transactional
+    public void addCard(final UUID clientId,
+                        final UUID cardId) {
+        clientRepository.addCard(
+                clientId.toString(),
+                cardId.toString()
+        );
+    }
+
 }

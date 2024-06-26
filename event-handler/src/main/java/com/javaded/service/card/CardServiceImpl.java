@@ -3,7 +3,10 @@ package com.javaded.service.card;
 
 import com.javaded.domain.exception.ResourceNotFoundException;
 import com.javaded.domain.model.Card;
+import com.javaded.domain.model.Client;
 import com.javaded.repository.CardRepository;
+import com.javaded.service.client.ClientQueryService;
+import com.javaded.service.client.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +23,8 @@ import static com.javaded.util.GenerationCardParameters.generateNumber;
 public class CardServiceImpl implements CardService {
 
     private final CardRepository cardRepository;
+    private final ClientQueryService clientQueryService;
+    private final ClientService clientService;
 
     @Override
     public Card getById(final UUID id) {
@@ -32,7 +37,10 @@ public class CardServiceImpl implements CardService {
         card.setCvv(generateCvv());
         card.setDate(generateDate());
         card.setNumber(generateNumber());
-        return cardRepository.save(card);
+        cardRepository.saveAndFlush(card);
+        Client client = clientQueryService.getByAccount(card.getAccount().getId());
+        clientService.addCard(client.getId(), card.getId());
+        return card;
     }
 
     @Override
@@ -43,6 +51,16 @@ public class CardServiceImpl implements CardService {
                 card.getAccount().getBalance().add(amount)
         );
         cardRepository.save(card);
+    }
+
+    @Override
+    @Transactional
+    public void addTransaction(final UUID cardId,
+                               final UUID transactionId) {
+        cardRepository.addTransaction(
+                cardId.toString(),
+                transactionId.toString()
+        );
     }
 
 }

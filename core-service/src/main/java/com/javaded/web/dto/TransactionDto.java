@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.groups.ConvertGroup;
 import lombok.Builder;
 
 import java.math.BigDecimal;
@@ -18,9 +19,12 @@ public record TransactionDto(
 
         @NotBlank(message = "Sender card must not be blank.", groups = OnCreate.class)
         @Valid
+        @ConvertGroup(from = OnCreate.class, to = OnTransactionFrom.class)
         CardDto from,
 
         @NotBlank(message = "Receiver card must not be blank.", groups = OnCreate.class)
+        @Valid
+        @ConvertGroup(from = OnCreate.class, to = OnTransactionFrom.class)
         CardDto to,
 
         @NotBlank(message = "Amount must not be blank.", groups = OnCreate.class)

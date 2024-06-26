@@ -13,4 +13,7 @@ public interface CardService {
 
     Card getById(UUID id);
 
+    void addTransaction(UUID cardId,
+                        UUID transactionId);
+
 }

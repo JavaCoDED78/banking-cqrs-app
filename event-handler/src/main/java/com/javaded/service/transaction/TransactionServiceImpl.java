@@ -25,7 +25,10 @@ public class TransactionServiceImpl implements TransactionService {
         checkBalance(cardFrom, transaction.getAmount());
         cardService.add(cardFrom, transaction.getAmount().negate());
         cardService.add(cardTo, transaction.getAmount());
-        return transactionRepository.save(transaction);
+        transactionRepository.saveAndFlush(transaction);
+        cardService.addTransaction(cardTo.getId(), transaction.getId());
+        cardService.addTransaction(cardFrom.getId(), transaction.getId());
+        return transaction;
     }
 
     private void checkBalance(final Card card,

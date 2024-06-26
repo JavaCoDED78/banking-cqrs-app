@@ -13,13 +13,21 @@ public record CardDto(
         @Null(message = "Id must be null.", groups = OnCreate.class)
         UUID id,
 
-        @NotBlank(message = "Number must not be blank.", groups = OnCreate.class)
+        @NotBlank(message = "Number must not be blank.",
+                groups = {OnCreate.class,
+                        OnTransactionFrom.class,
+                        OnTransactionTo.class}
+        )
         String number,
 
-        @NotBlank(message = "Cvv must not be blank.", groups = OnCreate.class)
+        @Null(message = "Cvv must not be blank.",
+                groups = OnTransactionTo.class
+        )
         String cvv,
 
-        @NotBlank(message = "Date must not be blank.", groups = OnCreate.class)
+        @NotBlank(message = "Date must not be blank.",
+                groups = {OnCreate.class, OnTransactionFrom.class}
+        )
         String date
 
 ) {

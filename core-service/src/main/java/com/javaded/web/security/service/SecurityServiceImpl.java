@@ -7,6 +7,7 @@ import com.javaded.domain.model.Transaction;
 import com.javaded.service.card.CardService;
 import com.javaded.service.client.ClientService;
 import com.javaded.service.transaction.TransactionService;
+import com.javaded.web.dto.CardDto;
 import com.javaded.web.security.SecurityUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -50,12 +51,12 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     @Override
-    public boolean canAccessCard(final Card card) {
+    public boolean canAccessCard(final CardDto card) {
         try {
             Card maybeCard = cardService.getByNumberAndDateAndCvv(
-                    card.getNumber(),
-                    card.getDate(),
-                    card.getCvv()
+                    card.number(),
+                    card.date(),
+                    card.cvv()
             );
             return canAccessCard(maybeCard.getId());
         } catch (ResourceNotFoundException e) {
