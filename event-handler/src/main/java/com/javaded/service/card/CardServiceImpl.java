@@ -5,6 +5,10 @@ import com.javaded.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static com.javaded.util.GenerationCardParameters.generateCvv;
+import static com.javaded.util.GenerationCardParameters.generateDate;
+import static com.javaded.util.GenerationCardParameters.generateNumber;
+
 @Service
 @RequiredArgsConstructor
 public class CardServiceImpl implements CardService {
@@ -13,7 +17,9 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public Card create(final Card card) {
-        //TODO set date cvv and number
+        card.setCvv(generateCvv());
+        card.setDate(generateDate());
+        card.setNumber(generateNumber());
         return cardRepository.save(card);
     }
 
