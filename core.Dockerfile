@@ -13,7 +13,6 @@ COPY core-service/src core-service/src
 RUN mvn clean package -DskipTests
 
 FROM openjdk:21-jdk-slim
-WORKDIR /app
 COPY --from=build /app/core-service/target/*.jar application.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "application.jar"]

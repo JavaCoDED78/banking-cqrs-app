@@ -13,7 +13,6 @@ COPY event-handler/src event-handler/src
 RUN mvn clean package -DskipTests
 
 FROM openjdk:21-jdk-slim
-WORKDIR /app
 COPY --from=build /app/event-handler/target/*.jar application.jar
 EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "application.jar"]
