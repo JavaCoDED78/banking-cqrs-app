@@ -10,7 +10,7 @@ import java.util.UUID;
 @Builder
 public record CardDto(
 
-        @NotBlank(message = "Id must not be blank.", groups = OnUpdate.class)
+        @NotNull(message = "Id must not be blank.", groups = OnUpdate.class)
         @Null(message = "Id must be null.", groups = OnCreate.class)
         UUID id,
 
