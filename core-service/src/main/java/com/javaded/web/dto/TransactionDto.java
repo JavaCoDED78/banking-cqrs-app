@@ -24,7 +24,7 @@ public record TransactionDto(
 
         @NotBlank(message = "Receiver card must not be blank.", groups = OnCreate.class)
         @Valid
-        @ConvertGroup(from = OnCreate.class, to = OnTransactionFrom.class)
+        @ConvertGroup(from = OnCreate.class, to = OnTransactionTo.class)
         CardDto to,
 
         @NotBlank(message = "Amount must not be blank.", groups = OnCreate.class)

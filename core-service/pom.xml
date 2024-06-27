@@ -92,7 +92,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <forceJavacCompilerUse>false</forceJavacCompilerUse>
+                    <forceLegacyJavacApi>false</forceLegacyJavacApi>
                     <fork>false</fork>
                     <compilerArgs>
                         <arg>-parameters</arg>

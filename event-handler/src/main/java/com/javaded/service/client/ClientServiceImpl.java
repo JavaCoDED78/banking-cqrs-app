@@ -27,7 +27,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    @jakarta.transaction.Transactional
+    @Transactional
     public void addCard(final UUID clientId,
                         final UUID cardId) {
         clientRepository.addCard(

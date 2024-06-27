@@ -1,6 +1,7 @@
 package com.javaded.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import lombok.Builder;
 
@@ -20,7 +21,11 @@ public record CardDto(
         )
         String number,
 
-        @Null(message = "Cvv must not be blank.",
+        @NotBlank(
+                message = "Cvv must be not blank.",
+                groups = {OnCreate.class, OnTransactionFrom.class}
+        )
+        @Null(message = "Cvv must be blank.",
                 groups = OnTransactionTo.class
         )
         String cvv,
