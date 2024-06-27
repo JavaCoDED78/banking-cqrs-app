@@ -18,7 +18,6 @@ public class TransactionCreateEventHandler implements EventHandler {
     private final Gson gson;
 
     @Override
-    @Transactional
     public void handle(final JsonObject object,
                        final Acknowledgment acknowledgment) {
         Gson gson = new Gson();
