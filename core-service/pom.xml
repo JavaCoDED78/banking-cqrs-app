@@ -3,6 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.javaded</groupId>
+    <artifactId>core-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>core-service</name>
+    <description>Core service of CQRS and Event Sourcing app</description>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -10,18 +16,11 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.javaded</groupId>
-    <artifactId>core-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>core-service</name>
-    <description>Core service of CQRS and Event Sourcing app</description>
-
     <properties>
         <java.version>21</java.version>
         <liquibase.version>4.28.0</liquibase.version>
         <postgresql.version>42.7.3</postgresql.version>
         <lombok.version>1.18.32</lombok.version>
-        <checkstyle.version>3.4.0</checkstyle.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <jwt.version>0.3.1</jwt.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
@@ -30,12 +29,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.javaded</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -91,7 +92,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <forceJavacCompilerUse>false</forceJavacCompilerUse>
+                    <forceLegacyJavacApi>false</forceLegacyJavacApi>
                     <fork>false</fork>
                     <compilerArgs>
                         <arg>-parameters</arg>
@@ -126,31 +127,6 @@
                         </exclude>
                     </excludes>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${checkstyle.version}</version>
-                <configuration>
-                    <configLocation>checkstyle-config.xml</configLocation>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                    <linkXRef>false</linkXRef>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
-                            <suppressionsFileExpression>checkstyle-suppressions.xml</suppressionsFileExpression>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

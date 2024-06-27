@@ -7,6 +7,7 @@ import com.javaded.web.dto.LoginRequestDto;
 import com.javaded.web.dto.LoginResponseDto;
 import com.javaded.web.dto.OnCreate;
 import com.javaded.web.mapper.ClientMapper;
+import jakarta.validation.Valid;
 import jakarta.validation.groups.Default;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -18,18 +19,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@Validated
 public class AuthController {
 
     private final AuthService authService;
     private final ClientMapper clientMapper;
 
     @PostMapping("/login")
-    public LoginResponseDto login(@RequestBody @Validated(Default.class) final LoginRequestDto loginRequestDto) {
+    public LoginResponseDto login(@RequestBody @Valid final LoginRequestDto loginRequestDto) {
         return authService.login(loginRequestDto);
     }
 
     @PostMapping("/register")
-    public void register(@RequestBody @Validated({Default.class, OnCreate.class}) final ClientDto clientDto) {
+    public void register(@RequestBody @Validated(OnCreate.class) final ClientDto clientDto) {
         Client client = clientMapper.fromDto(clientDto);
         authService.register(client);
     }

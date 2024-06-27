@@ -22,6 +22,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/transactions")
 @RequiredArgsConstructor
+@Validated
 public class TransactionController {
 
     private final TransactionService transactionService;
@@ -29,8 +30,8 @@ public class TransactionController {
     private final TransactionMapper transactionMapper;
 
     @PostMapping
-    @PreAuthorize("@ssi.canAccessCard(#transactionDto.from())")
-    public void create(@RequestBody @Validated({Default.class, OnCreate.class}) final TransactionDto transactionDto) {
+    @PreAuthorize("@ssi.canAccessCard(#transactionDto.from)")
+    public void create(@RequestBody @Validated(OnCreate.class) final TransactionDto transactionDto) {
         if (!cardService.existsByNumberAndDate(transactionDto.from().number(), transactionDto.to().date())) {
             throw new IllegalArgumentException("Card does not exist");
         }

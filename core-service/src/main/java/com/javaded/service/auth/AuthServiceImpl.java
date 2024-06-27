@@ -31,7 +31,9 @@ public class AuthServiceImpl implements AuthService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.username(), request.password())
         );
+        Client client = clientService.getByUsername(request.username());
         return LoginResponseDto.builder()
+                .id(client.getId())
                 .accessToken(
                         tokenService.create(
                                 TokenParameters.builder(
