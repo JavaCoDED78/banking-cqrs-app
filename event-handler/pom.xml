@@ -19,7 +19,7 @@
 	<properties>
 		<java.version>21</java.version>
         <lombok.version>1.18.36</lombok.version>
-        <spring-kafka.version>3.3.2</spring-kafka.version>
+        <spring-kafka.version>3.3.4</spring-kafka.version>
         <gson.version>2.12.1</gson.version>
         <postgresql.version>42.7.5</postgresql.version>
 	</properties>
